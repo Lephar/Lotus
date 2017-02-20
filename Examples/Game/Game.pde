@@ -1,83 +1,73 @@
-PImage bg;
-PVector sh,pos;
-PShape ch;
-boolean jump;
-int stat;
-
-void settings()
-{
-  size(800,600,P2D);
-  smooth(64);
-}
+int bgx,bgy;
+PImage background;
+boolean up,down,left,right,space;
+Player player;
+final int IDLE=4,WALK=12,JUMP=14,BACKWARD=-1,FORWARD=1;
 
 void setup()
 {
+  size(640,480,P3D);
+  //fullScreen(P3D);
   frameRate(60);
+  noSmooth();
   noStroke();
-  //noFill();
-  
-  rectMode(CENTER);
-  imageMode(CENTER);
-  textAlign(CENTER,CENTER);
+  fill(255,0,0);
 
-  bg=loadImage("background.jpg");
-  bg.resize(0,height);
-  pos=new PVector(0,0);
-  sh=new PVector(0,20);
-  jump=false;
-  stat=0;
+  textSize(64);
+  textMode(MODEL);
+  textAlign(CENTER,CENTER);
+  rectMode(CENTER);
+  ellipseMode(CENTER);
+  imageMode(CENTER);
+  blendMode(BLEND);
   
-  ch=createShape(GROUP);
-  ch.addChild(createShape(ELLIPSE,0,0,80,80));
-  ch.getChild(0).setFill(color(255,0,0));
-  ch.addChild(createShape(ELLIPSE,20,0,24,24));
-  ch.getChild(1).setFill(color(255,255,0));
+  bgx=bgy=0;
+  up=down=left=right=space=false;
+  (background=loadImage("bg0.jpg")).resize(0,height);
+  player=new Player();  
 }
 
 void draw()
 {
   translate(width/2,height/2);
+  image(background,bgx-background.width,bgy);
+  image(background,bgx,bgy);
+  image(background,bgx+background.width,bgy);
+  player.draw();
   
-  if(keyPressed&&keyCode==LEFT)
+  if(left)
   {
-    pos.x++;
-    ch.rotate(-0.036);
+    bgx++;
+    player.setStatus(WALK);
+    player.setDirection(BACKWARD);
   }
   
-  if(keyPressed&&keyCode==RIGHT)
+  if(right)
   {
-    pos.x--;
-    ch.rotate(0.036);
+    bgx--;
+    player.setStatus(WALK);
+    player.setDirection(FORWARD);
   }
   
-  if(keyPressed&&key==' ')
-  {
-    jump=true;
-  }
+  if((left&&right)||(!left&&!right)) player.setStatus(IDLE);
   
-  if(jump)
-  {
-    sh.y=20-40*sin(map(stat,0,30,0,PI));
-    stat++;
-    
-    if(stat==30)
-    {
-      jump=false;
-      sh.y=20;
-      stat=0;
-    }
-  }
-  
-  pos.x=pos.x%bg.width;
-
-  image(bg,pos.x,pos.y);
-  image(bg,pos.x+bg.width,pos.y);
-  image(bg,pos.x-bg.width,pos.y);
-  shape(ch,sh.x,sh.y);
-  text("Ziplamak icin space, hareket icin yon tuslari", 0, -height/2+40);
+  if(space) player.setStatus(JUMP);
 }
 
 void keyPressed()
 {
-  if(keyCode=='0') exit();
+  if(key==' ') space=true;
+  else if(keyCode==UP) up=true;
+  else if(keyCode==DOWN) down=true;
+  else if(keyCode==LEFT) left=true;
+  else if(keyCode==RIGHT) right=true;
+}
+
+void keyReleased()
+{
+  if(key==' ') space=false;
+  else if(keyCode==UP) up=false;
+  else if(keyCode==DOWN) down=false;
+  else if(keyCode==LEFT) left=false;
+  else if(keyCode==RIGHT) right=false;
 }

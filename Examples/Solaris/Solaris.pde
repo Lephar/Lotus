@@ -9,7 +9,7 @@ void setup()
 {
   fullScreen(P3D);
   frameRate(24);
-  smooth(16);
+  noSmooth();
   
   count = 2048;
   sun = new Sun(96,255,127,0,64,255,255,255);

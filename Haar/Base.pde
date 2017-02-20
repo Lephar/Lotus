@@ -28,5 +28,5 @@ int aval(PImage image, int x, int y){return aval(image.pixels[x+y*image.width]);
 int rval(PImage image, int x, int y){return rval(image.pixels[x+y*image.width]);}
 int gval(PImage image, int x, int y){return gval(image.pixels[x+y*image.width]);}
 int bval(PImage image, int x, int y){return bval(image.pixels[x+y*image.width]);}
-int lval(PImage image, int x, int y){return image.pixels[x+y*image.width];}
+int lval(PImage image, int x, int y){return lval(image.pixels[x+y*image.width]);}
 int cval(PImage image, int x, int y){return cval(image.pixels[x+y*image.width]);}
