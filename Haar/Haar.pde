@@ -1,11 +1,12 @@
 import processing.video.*;
 
-long haar[];
+long haar[][];
 Capture camera;
+int x1,y1,x2,y2;
 
 void settings()
 {
-  size(1280,720);
+  size(640,480);
   noSmooth();
 }
 
@@ -24,10 +25,28 @@ void setup()
 
 void draw()
 {
+  background(255);
   if(camera.available()) camera.read();
-  image(camera,width/2,height/2);
   haar=haar(camera);
-  fill();
-  rect();
+  //image(threshold(camera),width/2,height/2);
+  image(edge(blur(camera)),width/2,height/2);
   surface.setTitle(""+frameRate);
+}
+
+void mouseClicked()
+{
+  println(rval(get(mouseX,mouseY))+" "+gval(get(mouseX,mouseY))+" "+bval(get(mouseX,mouseY)));
+}
+
+void mousePressed()
+{
+  x1=mouseX;
+  y1=mouseY;
+}
+
+void mouseReleased()
+{
+  x2=mouseX;
+  y2=mouseY;
+  println(light(haar,x1,y1,x2-x1,y2-y1));
 }

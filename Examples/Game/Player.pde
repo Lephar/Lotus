@@ -6,7 +6,7 @@ class Player
   Player()
   {
     x=0;
-    y=0;
+    y=-24;
     frame=0;
     status=IDLE;
     direction=FORWARD;
@@ -16,12 +16,12 @@ class Player
     walkr=new PImage[WALK];
     jumpl=new PImage[JUMP];
     jumpr=new PImage[JUMP];
-    for(int i=0;i<IDLE;i++) (idlel[i]=loadImage("il"+i+".png")).resize(0,height/4);
-    for(int i=0;i<IDLE;i++) (idler[i]=loadImage("ir"+i+".png")).resize(0,height/4);
-    for(int i=0;i<WALK;i++) (walkl[i]=loadImage("wl"+i+".png")).resize(0,height/4);
-    for(int i=0;i<WALK;i++) (walkr[i]=loadImage("wr"+i+".png")).resize(0,height/4);
-    for(int i=0;i<JUMP;i++) (jumpl[i]=loadImage("jl"+i+".png")).resize(0,height/4);
-    for(int i=0;i<JUMP;i++) (jumpr[i]=loadImage("jr"+i+".png")).resize(0,height/4);
+    for(int i=0;i<IDLE;i++) (idlel[i]=loadImage("il"+i+".png")).resize(0,(int)(height/4.4));
+    for(int i=0;i<IDLE;i++) (idler[i]=loadImage("ir"+i+".png")).resize(0,(int)(height/4.4));
+    for(int i=0;i<WALK;i++) (walkl[i]=loadImage("wl"+i+".png")).resize(0,(int)(height/4.4));
+    for(int i=0;i<WALK;i++) (walkr[i]=loadImage("wr"+i+".png")).resize(0,(int)(height/4.4));
+    for(int i=0;i<JUMP;i++) (jumpl[i]=loadImage("jl"+i+".png")).resize(0,(int)(height/4.4));
+    for(int i=0;i<JUMP;i++) (jumpr[i]=loadImage("jr"+i+".png")).resize(0,(int)(height/4.4));
   }
   
   void draw()
