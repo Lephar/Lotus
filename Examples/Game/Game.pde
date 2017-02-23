@@ -37,7 +37,7 @@ void draw()
   image(background,background.width*(int)(1.5+player.x/background.width),0);
   
   player.draw();
-  
+ 
   if(left)
   {
     player.x--;

@@ -1,17 +1,21 @@
 class Player
 {
   int x,y,status,direction,frame;
-  float xVel;
+  float xVel, reelX, reelY; //reelX ve Y collision control icin gercek koordinat tutacak
   PImage idlel[],idler[],walkl[],walkr[],jumpl[],jumpr[];
   
   Player()
   {
     x=0;
-    y=height/4;
+    y=height/4; //player kaldirimda yurusun
     xVel = 0;
     frame=0;
     status=IDLE;
     direction=FORWARD;
+    
+    /*
+      Array boyutu belirleyen degerler Game.pde classindan geliyor
+    */
     idlel=new PImage[IDLE];
     idler=new PImage[IDLE];
     walkl=new PImage[WALK];
@@ -43,7 +47,6 @@ class Player
       frame=0;
     }
     frame++;
-    print("x: \n" + x);
   }
   
   void setStatus(int status)

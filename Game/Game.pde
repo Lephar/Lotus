@@ -26,26 +26,38 @@ void setup()
   (background=loadImage("bg1.png")).resize(0,height);
   gameObj = new ArrayList<GameObject>();
   player=new Player();  
+  
+  /* OYLESINE BIR OBJECT EKLEMESI */
+  pushMatrix();
+  translate(width/2,height/2);
+  stroke(250);
+  fill(0,0,255);
+  rect(0,100,50,50);
+  popMatrix();
 }
 
 void draw()
 {
   translate(width/2,height/2);
-  image(background,bgx-background.width,bgy);
-  image(background,bgx,bgy);
-  image(background,bgx+background.width,bgy);
+  camera(player.x,0,(height/2.0)/tan(PI*30.0/180.0),player.x,0,0,0,1,0);
+  
+  image(background,background.width*(int)(-0.5+player.x/background.width),0);
+  image(background,background.width*(int)(0.5+player.x/background.width),0);
+  image(background,background.width*(int)(1.5+player.x/background.width),0);
+  
   player.draw();
   
+  if(keyPressed) println("bgx: " + bgx);
   if(left)
   {
-    bgx++;
+    player.x--;
     player.setStatus(WALK);
     player.setDirection(BACKWARD);
   }
   
   if(right)
   {
-    bgx--;
+    player.x++;
     player.setStatus(WALK);
     player.setDirection(FORWARD);
   }
