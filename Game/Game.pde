@@ -21,19 +21,14 @@ void setup()
   ellipseMode(CENTER);
   imageMode(CENTER);
   blendMode(BLEND);
+  
   bgx=bgy=0;
   up=down=left=right=space=false;
   (background=loadImage("bg1.png")).resize(0,height);
   gameObj = new ArrayList<GameObject>();
   player=new Player();  
   
-  /* OYLESINE BIR OBJECT EKLEMESI */
-  pushMatrix();
-  translate(width/2,height/2);
-  stroke(250);
-  fill(0,0,255);
-  rect(0,100,50,50);
-  popMatrix();
+  
 }
 
 void draw()
@@ -45,9 +40,15 @@ void draw()
   image(background,background.width*(int)(0.5+player.x/background.width),0);
   image(background,background.width*(int)(1.5+player.x/background.width),0);
   
+  pushMatrix();
+  translate(width/2,height/2);
+  stroke(250);
+  fill(0,0,255);
+  rect(0,100,50,50);
+  popMatrix();
+  
   player.draw();
   
-  if(keyPressed) println("bgx: " + bgx);
   if(left)
   {
     player.x--;
