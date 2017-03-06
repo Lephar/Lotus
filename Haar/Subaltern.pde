@@ -1,4 +1,4 @@
-PImage edge(PImage raw){return edge(raw,24);}
+PImage edge(PImage raw){return edge(raw,16);}
 PImage threshold(PImage raw){return threshold(raw,128);}
 
 PImage equate(PImage raw)

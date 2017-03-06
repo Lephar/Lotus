@@ -1,34 +1,46 @@
-int iabs(int x){return x<0?-x:x;}
-int imin(int x, int y){return x<y?x:y;}
-int imax(int x, int y){return x<y?y:x;}
-int imin(int x, int y, int z){return x<y?(x<z?x:z):(y<z?y:z);}
-int imax(int x, int y, int z){return x<y?(y<z?z:y):(x<z?z:x);}
+PImage edgep(PImage raw)
+{
+  int dlim=16;
+  raw.loadPixels();
+  PImage edge=createImage(raw.width,raw.height,ARGB);
+  for(int i=0;i<edge.pixels.length;i++) edge.pixels[i]=color(255,0);
+  for(int i=1;i<edge.width;i++) for(int j=1;j<edge.height;j++)
+  {
+    int hdif=cdif(raw.pixels[i+j*raw.width],raw.pixels[(i-1)+j*raw.width]);
+    int vdif=cdif(raw.pixels[i+j*raw.width],raw.pixels[i+(j-1)*raw.width]);
+    //int ddif=cdif(raw.pixels[i+j*raw.width],raw.pixels[(i-1)+(j-1)*raw.width]);
+    //if(dlim<imax(hdif,vdif,ddif)) edge.pixels[i+j*edge.width]=color(0,255);
+    if(dlim<hdif&&dlim<vdif) edge.pixels[i+j*edge.width]=color(63,0,63,255);
+    else if(dlim<hdif) edge.pixels[i+j*edge.width]=color(127,0,0,255);
+    else if(dlim<vdif) edge.pixels[i+j*edge.width]=color(0,0,127,255);
+  }
+  edge.updatePixels();
+  return edge;
+}
 
-float fabs(float x){return x<0?-x:x;}
-float fmin(float x, float y){return x<y?x:y;}
-float fmax(float x, float y){return x<y?y:x;}
-float fmin(float x, float y, float z){return x<y?(x<z?x:z):(y<z?y:z);}
-float fmax(float x, float y, float z){return x<y?(y<z?z:y):(x<z?z:x);}
-
-int aval(color col){return (col&0xFF000000)>>24;}
-int rval(color col){return (col&0x00FF0000)>>16;}
-int gval(color col){return (col&0x0000FF00)>>8;}
-int bval(color col){return col&0x000000FF;}
-int lval(color col){return (rval(col)+gval(col)+bval(col))/3;}
-int cval(color col){return (int)hue(col);}
-int sval(color col){return (int)saturation(col);}
-
-int rdif(color col1, color col2){return iabs(rval(col1)-rval(col2));}
-int gdif(color col1, color col2){return iabs(gval(col1)-gval(col2));}
-int bdif(color col1, color col2){return iabs(bval(col1)-bval(col2));}
-int adif(color col1, color col2){return iabs(aval(col1)-aval(col2));}
-int ldif(color col1, color col2){return iabs(lval(col1)-lval(col2));}
-int cdif(color col1, color col2){return (rdif(col1,col2)+gdif(col1,col2)+bdif(col1,col2))/3;}
-int sdif(color col1, color col2){return iabs(sval(col1)-sval(col2));}
-
-int aval(PImage image, int x, int y){return aval(image.pixels[x+y*image.width]);}
-int rval(PImage image, int x, int y){return rval(image.pixels[x+y*image.width]);}
-int gval(PImage image, int x, int y){return gval(image.pixels[x+y*image.width]);}
-int bval(PImage image, int x, int y){return bval(image.pixels[x+y*image.width]);}
-int lval(PImage image, int x, int y){return lval(image.pixels[x+y*image.width]);}
-int cval(PImage image, int x, int y){return cval(image.pixels[x+y*image.width]);}
+PImage blurp(PImage raw)
+{
+  raw.loadPixels();
+  PImage blur=createImage(raw.width,raw.height,ARGB);
+  for(int i=0;i<raw.pixels.length;i++) blur.pixels[i]=raw.pixels[i];
+  for(int i=1;i<blur.width-1;i++) for(int j=1;j<blur.height-1;j++)
+  {
+    color c=raw.pixels[i+j*raw.width];
+    color tl=raw.pixels[(i-1)+(j-1)*raw.width];
+    //color tr=raw.pixels[(i+1)+(j-1)*raw.width];
+    //color bl=raw.pixels[(i-1)+(j+1)*raw.width];
+    //color br=raw.pixels[(i+1)+(j+1)*raw.width];
+    int ravg=(rval(c)+rval(tl))/2;
+    int gavg=(gval(c)+gval(tl))/2;
+    int bavg=(bval(c)+bval(tl))/2;
+    //int ravg=(rval(c)+rval(tl)+rval(tr)+rval(bl)+rval(br))/5;
+    //int gavg=(gval(c)+gval(tl)+gval(tr)+gval(bl)+gval(br))/5;
+    //int bavg=(bval(c)+bval(tl)+bval(tr)+bval(bl)+bval(br))/5;
+    //int ravg=(rval(raw.pixels[i+j*raw.width])+rval(raw.pixels[i+(j-1)*raw.width])+rval(raw.pixels[(i-1)+j*raw.width]))/3;
+    //int gavg=(gval(raw.pixels[i+j*raw.width])+gval(raw.pixels[i+(j-1)*raw.width])+gval(raw.pixels[(i-1)+j*raw.width]))/3;
+    //int bavg=(bval(raw.pixels[i+j*raw.width])+bval(raw.pixels[i+(j-1)*raw.width])+bval(raw.pixels[(i-1)+j*raw.width]))/3;
+    blur.pixels[i+j*blur.width]=color(ravg,gavg,bavg,255);
+  }
+  blur.updatePixels();
+  return blur;
+}

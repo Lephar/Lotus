@@ -40,7 +40,7 @@ class Player
       else image(walkr[frame/3%WALK],x,y);
     else if(status==JUMP)
       if(direction==BACKWARD) image(jumpl[frame/4%JUMP],x,y);
-      else image(jumpr[frame/3%JUMP],x,y);
+      else image(jumpr[frame/4%JUMP],x,y);
     if(status==JUMP&&frame/4==JUMP)
     {
       status=IDLE;
