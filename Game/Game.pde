@@ -101,6 +101,8 @@ void draw()
       if(faces[iface].y+faces[iface].height<height/3) space=true;
       else space=false;
     }
+    
+    else space=right=left=false;
   }
 }
 /*
