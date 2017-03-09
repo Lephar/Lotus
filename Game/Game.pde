@@ -2,12 +2,20 @@ import java.awt.*;
 import gab.opencv.*;
 import processing.video.*;
 
+/* karakter yaratilmasi, hareketlerinin define edilmesi ve arka plan tanimlanmasi */
+Player player;
 int bgx,bgy;
 PImage background;
 boolean up,down,left,right,space;
 final int IDLE=4,WALK=12,JUMP=14,BACKWARD=-1,FORWARD=1;
-ArrayList<GameObject> gameObj;
-Player player;
+
+/* objelerin kendilerinin ve koordinatlarinin tanimlanmasi */
+ArrayList<GameObject> gameObj; //objeleri tutan list
+int [] objectCoordinates; // bütün objelerin x coord. tutan array (uzunlugu numberOfObjects kadar olacak)
+int numberOfObjects; //kac obje oldugu
+int randObjNum; // objenin ID'sini belirler, 4 obje var diyelim, 1-4 arasi bir deger alip ona gore obje secip haritaya koydurur
+
+/* goruntu isleme degiskenleri */
 Capture cam;
 OpenCV cv;
 Rectangle faces[];

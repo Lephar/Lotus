@@ -1,14 +1,13 @@
 class Player
 {
   int x,y,status,direction,frame;
-  float xVel, reelX, reelY; //reelX ve Y collision control icin gercek koordinat tutacak
+  //float xVel, reelX, reelY; //reelX ve Y collision control icin gercek koordinat tutacak
   PImage idlel[],idler[],walkl[],walkr[],jumpl[],jumpr[];
   
   Player()
   {
     x=0;
     y=height/4; //player kaldirimda yurusun
-    xVel = 0;
     frame=0;
     status=IDLE;
     direction=FORWARD;
