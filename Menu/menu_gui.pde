@@ -32,11 +32,11 @@ public void createGUI(){
   G4P.setCursor(ARROW);
   surface.setTitle("TIN-H");
   button1 = new GButton(this, 26, 34, 237, 104);
-  button1.setIcon("Screenshot_1.png", 1, GAlign.EAST, GAlign.LEFT, GAlign.TOP);
+  button1.setIcon("start.png", 1, GAlign.EAST, GAlign.LEFT, GAlign.TOP);
   button1.setLocalColorScheme(GCScheme.GREEN_SCHEME);
   button1.addEventHandler(this, "button1_click1");
   button2 = new GButton(this, 294, 34, 167, 104);
-  button2.setIcon("Screenshot_2.png", 1, GAlign.EAST, GAlign.RIGHT, GAlign.MIDDLE);
+  button2.setIcon("exit.png", 1, GAlign.EAST, GAlign.RIGHT, GAlign.MIDDLE);
   button2.setLocalColorScheme(GCScheme.RED_SCHEME);
   button2.addEventHandler(this, "button2_click1");
 }
