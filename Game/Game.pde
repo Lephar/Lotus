@@ -10,9 +10,7 @@ boolean up,down,left,right,space;
 final int IDLE=4,WALK=12,JUMP=14,BACKWARD=-1,FORWARD=1;
 
 /* objelerin kendilerinin ve koordinatlarinin tanimlanmasi */
-ArrayList<GameObject> gameObj; //objeleri tutan list
-int [] objectCoordinates; // bütün objelerin x coord. tutan array (uzunlugu numberOfObjects kadar olacak)
-int numberOfObjects; //kac obje oldugu
+ArrayList<GameObject> gameObj; //objeleri tutan list, size = JSON'da tutulan coordinate verisi sayisi
 int randObjNum; // objenin ID'sini belirler, 4 obje var diyelim, 1-4 arasi bir deger alip ona gore obje secip haritaya koydurur
 
 /* goruntu isleme degiskenleri */

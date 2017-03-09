@@ -1,7 +1,7 @@
 class GameObject
 {
-  float x, y, w, h;
-  int objectNum;
+  float x, w, h; //x = x1 (baslangic x'i, w= genislik (bilinen object icin sabit), h = yükseklik(bilinen object icin sabit)
+  int objectNum; //hangi object yaratilacak, bunun icin bir ID gorevi gorur
   PImage objectImage;
   
   GameObject(float x, int objectNum)
