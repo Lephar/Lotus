@@ -110,6 +110,27 @@ void draw()
     
     else space=right=left=false;
   }
+  
+  pushMatrix();
+  rectMode(CORNER);
+  imageMode(CORNER);
+  translate(player.x-width/2+cam.width/2,-height/2);
+  scale(-0.5,0.5);
+  image(cam,0,0);
+  noFill();
+  strokeWeight(2);
+  stroke(255,255,0);
+  if(faces!=null) for(int i=0;i<faces.length;i++) rect(faces[i].x,faces[i].y,faces[i].width,faces[i].height);
+  line(0,cam.height/2,cam.width,cam.height/2);
+  line(cam.width/3,0,cam.width/3,cam.height);
+  line(2*cam.width/3,0,2*cam.width/3,cam.height);
+  noStroke();
+  fill(255,0,0);
+  if(faces!=null) for(int i=0;i<faces.length;i++) ellipse(faces[i].x+faces[i].width/2,faces[i].y+faces[i].height/2,16,16);
+  noFill();
+  imageMode(CENTER);
+  rectMode(CENTER);
+  popMatrix();
 }
 /*
 void keyPressed()
