@@ -44,6 +44,13 @@ void setup()
   
   (cam=new Capture(this,320,240,30)).start();
   (cv=new OpenCV(this,320,240)).loadCascade(OpenCV.CASCADE_FRONTALFACE);
+  
+  /* DENEME  -> BACKGROUND TRANSPARITY YUZUNDEN GORUNMUYOR BG GORUNUR IKEN*/ 
+  gameObj.add(new GameObject(50,1));
+  gameObj.add(new GameObject(90,1));
+  gameObj.add(new GameObject(140,1));
+  /***************/
+  
 }
 
 void draw()
@@ -51,19 +58,15 @@ void draw()
   translate(width/2,height/2);
   camera(player.x,0,(height/2.0)/tan(PI*30.0/180.0),player.x,0,0,0,1,0);
   
+  //pushMatrix();
+  //tint(255, 126);
   image(background,background.width*(int)(-0.5+player.x/background.width),0);
   image(background,background.width*(int)(0.5+player.x/background.width),0);
   image(background,background.width*(int)(1.5+player.x/background.width),0);
-  
-  pushMatrix();
-  translate(width/2,height/2);
-  stroke(250);
-  fill(0,0,255);
-  rect(0,100,50,50);
-  popMatrix();
-  
+  //popMatrix();
+    
   player.draw();
-  
+ 
   if(left)
   {
     player.x--;
