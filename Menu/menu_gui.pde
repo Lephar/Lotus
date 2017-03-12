@@ -5,7 +5,7 @@ public void start_button(GButton source, GEvent event) {
   println("start_button");
 }
 
-public void exit_button() {
+public void exit_button(GButton source, GEvent event) {
   System.exit(0);
 }
 
