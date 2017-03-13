@@ -18,19 +18,21 @@ class GameObject
     h = objectImage.height;
     }
     
+  }
+  void draw()
+  {
+   
     /*DENEME*/
     if (objectNum == 1)
     {
      w = 30;
      h = 30;
      pushMatrix();
-     translate(width/2,height/2);
      fill(255,0,0);
      rect(x,30*height/100,w,h);
      popMatrix();
-    }
-    
-  } 
+    } 
+  }
 }
 
   

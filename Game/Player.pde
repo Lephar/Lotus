@@ -1,6 +1,6 @@
 class Player
 {
-  int x,y,status,direction,frame;
+  int x,y,w,h,status,direction,frame;
   //float xVel, reelX, reelY; //reelX ve Y collision control icin gercek koordinat tutacak
   PImage idlel[],idler[],walkl[],walkr[],jumpl[],jumpr[];
   
@@ -27,6 +27,8 @@ class Player
     for(int i=0;i<WALK;i++) (walkr[i]=loadImage("wr"+i+".png")).resize(0,height/4);
     for(int i=0;i<JUMP;i++) (jumpl[i]=loadImage("jl"+i+".png")).resize(0,height/4);
     for(int i=0;i<JUMP;i++) (jumpr[i]=loadImage("jr"+i+".png")).resize(0,height/4);
+    w=idlel[0].width;
+    h=idlel[0].height;
   }
   
   void draw()

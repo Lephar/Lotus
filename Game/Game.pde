@@ -58,23 +58,24 @@ void draw()
   translate(width/2,height/2);
   camera(player.x,0,(height/2.0)/tan(PI*30.0/180.0),player.x,0,0,0,1,0);
   
-  //pushMatrix();
-  //tint(255, 126);
+
   image(background,background.width*(int)(-0.5+player.x/background.width),0);
   image(background,background.width*(int)(0.5+player.x/background.width),0);
   image(background,background.width*(int)(1.5+player.x/background.width),0);
-  //popMatrix();
     
   player.draw();
- 
-  if(left)
+  gameObj.get(2).draw();
+  
+  System.out.println(player.y + "   " + gameObj.get(1).h);
+  
+  if(left && !isLeftCollision())
   {
     player.x--;
     player.setStatus(WALK);
     player.setDirection(BACKWARD);
   }
   
-  if(right)
+  if(right && !isRightCollision())
   {
     player.x++;
     player.setStatus(WALK);
@@ -83,7 +84,11 @@ void draw()
   
   if((left && right)||(!left && !right)) player.setStatus(IDLE);
   
-  if(space) player.setStatus(JUMP);
+  if(space)
+  {
+    player.setStatus(JUMP);
+   //player.y+=10;
+  }
   
   if(cam.available()) cam.read();
   
@@ -135,6 +140,33 @@ void draw()
   rectMode(CENTER);
   popMatrix();
 }
+
+boolean isRightCollision()
+{
+  boolean val = false;
+  for(int i = 0; i < gameObj.size(); i++)
+  {
+    if(player.x+player.w/2 >= gameObj.get(i).x-gameObj.get(i).w/2 && player.x+player.w/2 <= gameObj.get(i).x+gameObj.get(i).w/2) //X EKSENI OKEY AMA OBJENIN Y EKSENINI CEKERKEN SORUN VAR
+    {
+      val = true;
+    }
+  }
+  return val;
+}
+
+boolean isLeftCollision()
+{
+  boolean val = false;
+  for(int i = 0; i < gameObj.size(); i++)
+  {
+    if(player.x-player.w/2<=gameObj.get(i).x + gameObj.get(i).w/2&&player.x-player.w/2<=gameObj.get(i).x-gameObj.get(i).w/2) //X EKSENI OKEY AMA OBJENIN Y EKSENINI CEKERKEN SORUN VAR
+    {
+      val = true;
+    }
+  }
+  return val;
+}
+
 /*
 void keyPressed()
 {
