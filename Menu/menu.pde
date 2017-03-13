@@ -14,9 +14,9 @@ public void setup(){
   (animate[i*12+j]=image.get(j*165,i*292,165,292)).resize(60,0);
   bg=loadImage("denemefoto.jpg");
   bg.resize(1000,height);
-  file = new SoundFile(this, "fon_music.mp3");
+  file = new SoundFile(this, "fon.mp3");
   file.play();
-  file.rate(0.5);
+ // file.rate(0.5);
   file.loop();
   i=0;
 }
