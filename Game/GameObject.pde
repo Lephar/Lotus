@@ -1,37 +1,46 @@
 class GameObject
 {
-  float x, w, h; //x = x1 (baslangic x'i, w= genislik (bilinen object icin sabit), h = yükseklik(bilinen object icin sabit)
-  int objectNum; //hangi object yaratilacak, bunun icin bir ID gorevi gorur
+  float x,y, w, h; //x = x1 (baslangic x'i, w= genislik (bilinen object icin sabit), h = yükseklik(bilinen object icin sabit)
+  int objectId; //hangi object yaratilacak, bunun icin bir ID gorevi gorur
   PImage objectImage;
+  
+  /* nesnelerin genislik ve yükseklikleri belirlensin onceden */
   int copW = 0;
   int copY = 0;
   
-  GameObject(float x, int objectNum)
+  GameObject(int objectId, int x, int y)
   {
     this.x = x;
-    this.objectNum = objectNum;
+    this.objectId = objectId;
+    this.y = y;
+    this.w = 0;
     
-    if (objectNum == 0) // cöp icin
+    /* DENEME
+    if (objectId == 0)
     {
     (objectImage = loadImage("trash.png")).resize(copW,copY);
     w = objectImage.width;
     h = objectImage.height;
     }
+    */
+    
+    (objectImage = loadImage("tempSekil.jpg")).resize(45,45);
+    w = objectImage.width;
+    //h = objectImage.height;
+    h = arrangeY(y);
     
   }
   void draw()
   {
-   
-    /*DENEME*/
-    if (objectNum == 1)
-    {
-     w = 30;
-     h = 30;
-     pushMatrix();
-     fill(255,0,0);
-     rect(x,30*height/100,w,h);
-     popMatrix();
-    } 
+    image(objectImage,x,arrangeY(y));
+  }
+  
+  float arrangeY(float y)
+  {
+    float diff = Math.abs(player.h-this.h);
+    float retVal =  y+ (height/4);
+    
+    return retVal;
   }
 }
 

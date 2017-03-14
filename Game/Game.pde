@@ -11,7 +11,12 @@ final int IDLE=4,WALK=12,JUMP=14,BACKWARD=-1,FORWARD=1;
 
 /* objelerin kendilerinin ve koordinatlarinin tanimlanmasi */
 ArrayList<GameObject> gameObj; //objeleri tutan list, size = JSON'da tutulan coordinate verisi sayisi
-int randObjNum; // objenin ID'sini belirler, 4 obje var diyelim, 1-4 arasi bir deger alip ona gore obje secip haritaya koydurur
+GameObject temp;
+String lines[];
+int xCoord[];
+int yCoord [];
+int objId[];
+String tempArr [];
 
 /* goruntu isleme degiskenleri */
 Capture cam;
@@ -40,17 +45,28 @@ void setup()
   up=down=left=right=space=false;
   (background=loadImage("bg1.png")).resize(0,height);
   gameObj = new ArrayList<GameObject>();
+  lines = loadStrings("GameData.txt");
+  tempArr =new String[3];
+  
   player=new Player();  
   
   (cam=new Capture(this,320,240,30)).start();
   (cv=new OpenCV(this,320,240)).loadCascade(OpenCV.CASCADE_FRONTALFACE);
   
-  /* DENEME  -> BACKGROUND TRANSPARITY YUZUNDEN GORUNMUYOR BG GORUNUR IKEN*/ 
-  gameObj.add(new GameObject(50,1));
-  gameObj.add(new GameObject(90,1));
-  gameObj.add(new GameObject(140,1));
-  /***************/
-  
+  for (int i = 0 ; i < lines.length; i++) 
+    {
+      tempArr = lines[i].split(" ");
+      temp = new GameObject(Integer.parseInt(tempArr[0]), Integer.parseInt(tempArr[1]),Integer.parseInt(tempArr[2]));
+      gameObj.add(temp);
+    }
+    
+    /* SILINECEK */
+    for (int i = 0 ; i < lines.length; i++) 
+    {
+      println("" + i + ": " + gameObj.get(i).objectId + " " + gameObj.get(i).x + " " + gameObj.get(i).y);
+    } 
+    println("player y: " + player.y + " obj y: " + gameObj.get(0).y + " obj h: " + gameObj.get(0).h); 
+    /*********/
 }
 
 void draw()
@@ -62,11 +78,13 @@ void draw()
   image(background,background.width*(int)(-0.5+player.x/background.width),0);
   image(background,background.width*(int)(0.5+player.x/background.width),0);
   image(background,background.width*(int)(1.5+player.x/background.width),0);
-    
-  player.draw();
-  gameObj.get(2).draw();
   
-  System.out.println(player.y + "   " + gameObj.get(1).h);
+  for (int i = 0 ; i < lines.length; i++) 
+   {
+     gameObj.get(i).draw();
+   }
+   
+  player.draw();
   
   if(left && !isLeftCollision())
   {
@@ -159,7 +177,7 @@ boolean isLeftCollision()
   boolean val = false;
   for(int i = 0; i < gameObj.size(); i++)
   {
-    if(player.x-player.w/2<=gameObj.get(i).x + gameObj.get(i).w/2&&player.x-player.w/2<=gameObj.get(i).x-gameObj.get(i).w/2) //X EKSENI OKEY AMA OBJENIN Y EKSENINI CEKERKEN SORUN VAR
+    if(player.x-player.w/2<=gameObj.get(i).x + gameObj.get(i).w/2 && player.x-player.w/2>=gameObj.get(i).x-gameObj.get(i).w/2) //X EKSENI OKEY AMA OBJENIN Y EKSENINI CEKERKEN SORUN VAR
     {
       val = true;
     }
