@@ -12,6 +12,7 @@ final int IDLE=4,WALK=12,JUMP=14,BACKWARD=-1,FORWARD=1;
 /* objelerin kendilerinin ve koordinatlarinin tanimlanmasi */
 ArrayList<GameObject> gameObj; //objeleri tutan list, size = JSON'da tutulan coordinate verisi sayisi
 ArrayList<Gold> golds;
+Gold g;
 GameObject temp;
 String lines[];
 int xCoord[];
@@ -68,7 +69,12 @@ void setup()
       println("" + i + ": " + gameObj.get(i).objectId + " " + gameObj.get(i).x + " " + gameObj.get(i).y);
     } 
     println("player y: " + player.y + " obj y: " + gameObj.get(0).y + " obj h: " + gameObj.get(0).h); 
+    
+     g = new Gold(100,50,10); // ARRAYLIST SEKLINDE EKLE
     /*********/
+    
+   
+    
 }
 
 void draw()
@@ -81,6 +87,9 @@ void draw()
   image(background,background.width*(int)(0.5+player.x/background.width),0);
   image(background,background.width*(int)(1.5+player.x/background.width),0);
   
+  ////
+  /* GOLDLIST YAZDIR */
+  /////
   for (int i = 0 ; i < lines.length; i++) 
    {
      gameObj.get(i).draw();

@@ -8,7 +8,7 @@ class GameObject
   {
     this.x = x;
     this.objectId = objectId;
-    this.y += height/3; // image'in bastirilacagi yukseklik, collision control ile alakasi yok sadece goruntu amacli
+    this.y = Math.abs(height/3 - y); // image'in bastirilacagi yukseklik, collision control ile alakasi yok sadece goruntu amacli
     this.w = 0;
     this.h = height/4; // player ile ayni yerde en basta, collision control bununla yapilacak
     
