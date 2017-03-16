@@ -18,12 +18,12 @@ public void createGUI(){
   G4P.setGlobalColorScheme(GCScheme.BLUE_SCHEME);
   G4P.setCursor(ARROW);
   surface.setTitle("TIN-H");
-  start_button = new GButton(this, 26, 34, 237, 104);
+  start_button = new GButton(this, 50, 100, 237, 104);
   start_button.setIcon("start.png", 1, GAlign.EAST, GAlign.LEFT, GAlign.TOP);
   start_button.setLocalColorScheme(GCScheme.GREEN_SCHEME);
   start_button.addEventHandler(this, "start_button");
-  exit_button = new GButton(this, 294, 34, 167, 104);
-  exit_button.setIcon("exit.png", 1, GAlign.EAST, GAlign.RIGHT, GAlign.MIDDLE);
+  exit_button = new GButton(this, 350, 100, 237, 104);
+  exit_button.setIcon("exit.png", 1, GAlign.EAST, GAlign.LEFT, GAlign.MIDDLE);
   exit_button.setLocalColorScheme(GCScheme.RED_SCHEME);
   exit_button.addEventHandler(this, "exit_button");
 }

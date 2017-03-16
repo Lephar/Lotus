@@ -6,7 +6,7 @@ import processing.sound.*;
 SoundFile file;
 
 public void setup(){
-  size(480, 320, JAVA2D);
+  size(640, 480, JAVA2D);
   createGUI();
   image=loadImage("character.png");
   animate=new PImage[72];
@@ -25,7 +25,7 @@ public void draw(){
   background(230);
   image(bg,i,0);
   image(bg,i+bg.width,0);
-  image(animate[frameCount/2%64],200,height/2);
+  image(animate[frameCount/2%64],280,height/1.7);
  
   i--;
   if(i<=-1000)
