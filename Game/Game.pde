@@ -11,6 +11,7 @@ final int IDLE=4,WALK=12,JUMP=14,BACKWARD=-1,FORWARD=1;
 
 /* objelerin kendilerinin ve koordinatlarinin tanimlanmasi */
 ArrayList<GameObject> gameObj; //objeleri tutan list, size = JSON'da tutulan coordinate verisi sayisi
+ArrayList<Gold> golds;
 GameObject temp;
 String lines[];
 int xCoord[];
@@ -45,6 +46,7 @@ void setup()
   up=down=left=right=space=false;
   (background=loadImage("bg1.png")).resize(0,height);
   gameObj = new ArrayList<GameObject>();
+  golds = new ArrayList<Gold>();
   lines = loadStrings("GameData.txt");
   tempArr =new String[3];
   
@@ -53,7 +55,7 @@ void setup()
   (cam=new Capture(this,320,240,30)).start();
   (cv=new OpenCV(this,320,240)).loadCascade(OpenCV.CASCADE_FRONTALFACE);
   
-  for (int i = 0 ; i < lines.length; i++) 
+  for (int i = 0 ; i < lines.length; i++) // disaridan gelen coordinate verileri ile oyun objelerinin yaratilmasi islemi
     {
       tempArr = lines[i].split(" ");
       temp = new GameObject(Integer.parseInt(tempArr[0]), Integer.parseInt(tempArr[1]),Integer.parseInt(tempArr[2]));

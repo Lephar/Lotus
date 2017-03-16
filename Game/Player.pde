@@ -1,6 +1,6 @@
 class Player
 {
-  int x,y,w,h,status,direction,frame;
+  int x,y,w,h,status,direction,frame,point; //point, topladigi puan
   //float xVel, reelX, reelY; //reelX ve Y collision control icin gercek koordinat tutacak
   PImage idlel[],idler[],walkl[],walkr[],jumpl[],jumpr[];
   

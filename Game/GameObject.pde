@@ -4,10 +4,6 @@ class GameObject
   int objectId; //hangi object yaratilacak, bunun icin bir ID gorevi gorur
   PImage objectImage;
   
-  /* nesnelerin genislik ve yükseklikleri belirlensin onceden */
-  int copW = 32;
-  int copY = 40;
-  
   GameObject(int objectId, int x, int y)
   {
     this.x = x;
@@ -19,14 +15,25 @@ class GameObject
     
     if (objectId == 1) //cöp icin
     {
-      (objectImage = loadImage("bin.png")).resize(copW,copY);
+      (objectImage = loadImage("bin.png")).resize(40,50);
       w = objectImage.width;
       h +=objectImage.height; // objenin ilk referans yuksekligi + kendi yuksekligi = toplam yukseklik (collision kontrol icin)
     }
-    /*BURASI GENISLETILECEK */
-    else
+    else if(objectId == 2) //hidrant icin
     {
-      (objectImage = loadImage("bin.png")).resize(64,64); // bin.png degisecek, gecici bu
+      (objectImage = loadImage("hidrant.png")).resize(30,40);
+      w = objectImage.width;
+      h +=objectImage.height;
+    } 
+    else if(objectId == 3) //bank icin
+    {
+      (objectImage = loadImage("bank.png")).resize(130,50);
+      w = objectImage.width;
+      h +=objectImage.height;
+    } 
+    else if(objectId == 4) //cubuk icin
+    {
+      (objectImage = loadImage("bank.png")).resize(130,50);
       w = objectImage.width;
       h +=objectImage.height;
     } 
