@@ -21,7 +21,7 @@ class GameObject
     }
     else if(objectId == 2) //hidrant icin
     {
-      (objectImage = loadImage("hidrant.png")).resize(30,200);
+      (objectImage = loadImage("hidrant.png")).resize(30,50);
       w = objectImage.width;
       h +=objectImage.height;
     } 
