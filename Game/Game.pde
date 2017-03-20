@@ -186,6 +186,7 @@ boolean isRightCollision()
 boolean isLeftCollision()
 {
   boolean val = false;
+  if(player.x <= -100 ) return true; // oyuncu baslangicta sola gidemesin collision gibi davransin
   for(int i = 0; i < gameObj.size(); i++)
   {
     if(player.x-player.w/2<=gameObj.get(i).x + gameObj.get(i).w/2 && player.x-player.w/2>=gameObj.get(i).x-gameObj.get(i).w/2) //X EKSENI OKEY AMA OBJENIN Y EKSENINI CEKERKEN SORUN VAR
