@@ -15,8 +15,6 @@ ArrayList<Gold> golds;
 Gold g;
 GameObject temp;
 String lines[];
-int xCoord[];
-int yCoord [];
 int objId[];
 String tempArr [];
 
@@ -96,7 +94,7 @@ void draw()
    }
    
   player.draw();
-  
+  g.draw();
   if(left && !isLeftCollision())
   {
     player.x--;
@@ -147,7 +145,7 @@ void draw()
     
     else space=right=left=false;
   }
-  
+
   pushMatrix();
   rectMode(CORNER);
   imageMode(CORNER);
@@ -169,13 +167,12 @@ void draw()
   rectMode(CENTER);
   popMatrix();
 }
-
-boolean isRightCollision()
+  boolean isRightCollision()
 {
   boolean val = false;
   for(int i = 0; i < gameObj.size(); i++)
   {
-    if(player.x+player.w/2 >= gameObj.get(i).x-gameObj.get(i).w/2 && player.x+player.w/2 <= gameObj.get(i).x+gameObj.get(i).w/2) //X EKSENI OKEY AMA OBJENIN Y EKSENINI CEKERKEN SORUN VAR
+    if(player.x+player.w/2 >= gameObj.get(i).x-gameObj.get(i).w/2 && player.x+player.w/2 <= gameObj.get(i).x+gameObj.get(i).w/2 && player.y < gameObj.get(i).h)
     {
       val = true;
     }
@@ -189,14 +186,13 @@ boolean isLeftCollision()
   if(player.x <= -100 ) return true; // oyuncu baslangicta sola gidemesin collision gibi davransin
   for(int i = 0; i < gameObj.size(); i++)
   {
-    if(player.x-player.w/2<=gameObj.get(i).x + gameObj.get(i).w/2 && player.x-player.w/2>=gameObj.get(i).x-gameObj.get(i).w/2) //X EKSENI OKEY AMA OBJENIN Y EKSENINI CEKERKEN SORUN VAR
+    if(player.x-player.w/2<=gameObj.get(i).x + gameObj.get(i).w/2 && player.x-player.w/2>=gameObj.get(i).x-gameObj.get(i).w/2 && player.y < gameObj.get(i).h)
     {
       val = true;
     }
   }
   return val;
 }
-
 /*
 void keyPressed()
 {

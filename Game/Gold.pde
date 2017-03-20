@@ -14,7 +14,7 @@ class Gold
     for(int i = 0; i < goldImages.length; i++)
     {
       num = i + 1;
-      (goldImages[i] = loadImage("" + num +".png")).resize(30,40);      
+      (goldImages[i] = loadImage("" + num +".png")).resize(0,40);      
     }
     
   }
