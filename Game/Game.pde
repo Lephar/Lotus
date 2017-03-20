@@ -141,7 +141,7 @@ void draw()
       else if(faces[iface].x*2+faces[iface].width>2*width/3) left=true;
       else right=left=false;
       
-      if(faces[iface].y+faces[iface].height<height/3) space=true;
+      if(faces[iface].y+faces[iface].height/2<height/3) space=true;
       else space=false;
     }
     
@@ -158,7 +158,7 @@ void draw()
   strokeWeight(2);
   stroke(255,255,0);
   if(faces!=null) for(int i=0;i<faces.length;i++) rect(faces[i].x,faces[i].y,faces[i].width,faces[i].height);
-  line(0,cam.height/2,cam.width,cam.height/2);
+  line(0,cam.height/3,cam.width,cam.height/3);
   line(cam.width/3,0,cam.width/3,cam.height);
   line(2*cam.width/3,0,2*cam.width/3,cam.height);
   noStroke();
