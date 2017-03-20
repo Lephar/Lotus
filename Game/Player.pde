@@ -1,5 +1,6 @@
 class Player
 {
+  float scale;
   int x,y,w,h,status,direction,frame,point; //point, topladigi puan
   //float xVel, reelX, reelY; //reelX ve Y collision control icin gercek koordinat tutacak
   PImage idlel[],idler[],walkl[],walkr[],jumpl[],jumpr[];
@@ -11,6 +12,7 @@ class Player
     frame=0;
     status=IDLE;
     direction=FORWARD;
+    scale=height/180;
     
     /*
       Array boyutu belirleyen degerler Game.pde classindan geliyor
@@ -21,12 +23,12 @@ class Player
     walkr=new PImage[WALK];
     jumpl=new PImage[JUMP];
     jumpr=new PImage[JUMP];
-    for(int i=0;i<IDLE;i++) (idlel[i]=loadImage("il"+i+".png")).resize(0,height/4);
-    for(int i=0;i<IDLE;i++) (idler[i]=loadImage("ir"+i+".png")).resize(0,height/4);
-    for(int i=0;i<WALK;i++) (walkl[i]=loadImage("wl"+i+".png")).resize(0,height/4);
-    for(int i=0;i<WALK;i++) (walkr[i]=loadImage("wr"+i+".png")).resize(0,height/4);
-    for(int i=0;i<JUMP;i++) (jumpl[i]=loadImage("jl"+i+".png")).resize(0,height/4);
-    for(int i=0;i<JUMP;i++) (jumpr[i]=loadImage("jr"+i+".png")).resize(0,height/4);
+    for(int i=0;i<IDLE;i++) (idlel[i]=loadImage("il"+i+".png")).resize(0,(int)(idlel[i].height/scale));
+    for(int i=0;i<IDLE;i++) (idler[i]=loadImage("ir"+i+".png")).resize(0,(int)(idler[i].height/scale));
+    for(int i=0;i<WALK;i++) (walkl[i]=loadImage("wl"+i+".png")).resize(0,(int)(walkl[i].height/scale));
+    for(int i=0;i<WALK;i++) (walkr[i]=loadImage("wr"+i+".png")).resize(0,(int)(walkr[i].height/scale));
+    for(int i=0;i<JUMP;i++) (jumpl[i]=loadImage("jl"+i+".png")).resize(0,(int)(jumpl[i].height/scale));
+    for(int i=0;i<JUMP;i++) (jumpr[i]=loadImage("jr"+i+".png")).resize(0,(int)(jumpr[i].height/scale));
     w=idlel[0].width;
     h=idlel[0].height;
   }
