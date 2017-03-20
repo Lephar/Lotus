@@ -8,7 +8,7 @@ class GameObject
   {
     this.x = x;
     this.objectId = objectId;
-    this.y = Math.abs(height/3 - y); // image'in bastirilacagi yukseklik, collision control ile alakasi yok sadece goruntu amacli
+    this.y = Math.abs((player.h/2)+height/4 - y); // image'in bastirilacagi yukseklik, collision control ile alakasi yok sadece goruntu amacli
     this.w = 0;
     this.h = height/4; // player ile ayni yerde en basta, collision control bununla yapilacak
     
@@ -21,13 +21,13 @@ class GameObject
     }
     else if(objectId == 2) //hidrant icin
     {
-      (objectImage = loadImage("hidrant.png")).resize(30,40);
+      (objectImage = loadImage("hidrant.png")).resize(30,200);
       w = objectImage.width;
       h +=objectImage.height;
     } 
     else if(objectId == 3) //bank icin
     {
-      (objectImage = loadImage("bank.png")).resize(130,50);
+      (objectImage = loadImage("bank.png")).resize(120,65);
       w = objectImage.width;
       h +=objectImage.height;
     } 
@@ -41,7 +41,7 @@ class GameObject
   
   void draw()
   {
-    image(objectImage,x,y);
+    image(objectImage,x,y-objectImage.height/2);
   }
   
   /*
