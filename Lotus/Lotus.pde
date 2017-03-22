@@ -2,10 +2,11 @@ float unit;
 int time, score, mode;
 boolean up, down, left, right, space;
 String feature[], lines[];
-final int IDLE=4, WALK=12, FALL=13, JUMP=14, BACKWARD=-1, FORWARD=1, LIMIT=6, GOLD=26;
+final int IDLE=4, WALK=12, FALL=13, JUMP=14, BACKWARD=-1, FORWARD=1, LIMIT=6, GOLD=26, BIRD=2;
 ArrayList<Item> items;
 ArrayList<Gold> gold;
 PImage background;
+Bird bird;
 Player player;
 
 void settings()
@@ -34,7 +35,11 @@ void initObjects()
   lines = loadStrings("GameData.txt");
   
   items.add(new Item(2,500,0));
+  items.add(new Item(4,400,0));
+  items.add(new Item(5,600,0));
+  items.add(new Item(6,800,0));
   gold.add(new Gold(300,0));
+  bird = new Bird(300,0);
   
   /*
   for (int i = 0; i < lines.length; i++)
@@ -74,15 +79,14 @@ void draw()
 
 void drawBackground()
 {
-  image(background,0,0);
-  image(background,background.width,0);
-  image(background,-background.width,0);
+  for(int i=-1; i<16; i++) image(background,i*background.width,0);
 }
 
 void drawObjects()
 {
   for(int i=0; i<items.size(); i++) items.get(i).draw();
   for(int i=0; i<gold.size(); i++) gold.get(i).draw();
+  bird.draw();
 }
 
 void drawPlayer()
