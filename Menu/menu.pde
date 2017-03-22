@@ -6,7 +6,7 @@ import processing.sound.*;
 SoundFile file;
 
 public void setup(){
-  size(640, 480, JAVA2D);
+  size(640, 480);
   createGUI();
   image=loadImage("character.png");
   animate=new PImage[72];
@@ -16,7 +16,6 @@ public void setup(){
   bg.resize(1000,height);
   file = new SoundFile(this, "fon.mp3");
   file.play();
- // file.rate(0.5);
   file.loop();
   i=0;
 }
