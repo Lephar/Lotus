@@ -33,20 +33,20 @@ void initObjects()
   gold = new ArrayList<Gold>();
   items = new ArrayList<Item>();
   lines = loadStrings("GameData.txt");
-  
-  //items.add(new Item(2,500,0));
+  /*
+  items.add(new Item(2,500,0));
   items.add(new Item(5,400,0));
   items.add(new Item(6,437,0));
   items.add(new Item(7,525,0));
+  */
   gold.add(new Gold(300,0));
   bird = new Bird(300,0);
   
-  /*
   for (int i = 0; i < lines.length; i++)
   {
     feature = lines[i].split(" ");
     items.add(new Item(Integer.parseInt(tempArr[0]), Integer.parseInt(tempArr[1]), Integer.parseInt(tempArr[2])));
-  }*/
+  }
 }
 
 void initFrame()
