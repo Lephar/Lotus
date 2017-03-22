@@ -31,8 +31,8 @@ float yVel;
 boolean isMaxY;
 void setup()
 {
-  size(640, 480, P3D);
-  //fullScreen(P3D);
+  //size(800, 600, P3D);
+  fullScreen(P3D);
   frameRate(60);
   noSmooth();
   noStroke();
