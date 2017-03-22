@@ -16,8 +16,8 @@ class Item
     w = image.width;
     h = image.height;
     
-    this.x = x * unit;
-    this.y = (y + 318) * unit  - h;
+    this.x = x*unit;
+    this.y = (y+318)*unit-h;
   }
   
   void draw()

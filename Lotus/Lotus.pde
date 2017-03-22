@@ -2,16 +2,16 @@ float unit;
 int time, score, mode;
 boolean up, down, left, right, space;
 String feature[], lines[];
-final int IDLE=4, WALK=12, FALL=13, JUMP=14, BACKWARD=-1, FORWARD=1, LIMIT=6;
-PImage background;
+final int IDLE=4, WALK=12, FALL=13, JUMP=14, BACKWARD=-1, FORWARD=1, LIMIT=6, GOLD=26;
 ArrayList<Item> items;
-
+ArrayList<Gold> gold;
+PImage background;
 Player player;
 
 void settings()
 {
   fullScreen(P3D);
-  //size(640,480);
+  //size(640,480,P3D);
   noSmooth();
 }
 
@@ -29,20 +29,24 @@ void setup()
 
 void initObjects()
 {
+  gold = new ArrayList<Gold>();
   items = new ArrayList<Item>();
   lines = loadStrings("GameData.txt");
   
+  items.add(new Item(2,500,0));
+  gold.add(new Gold(300,0));
+  
+  /*
   for (int i = 0; i < lines.length; i++)
   {
     feature = lines[i].split(" ");
-    //items.add(new Item(Integer.parseInt(tempArr[0]), Integer.parseInt(tempArr[1]), Integer.parseInt(tempArr[2])));
-    items.add(new Item(2,430,0));
-  }
+    items.add(new Item(Integer.parseInt(tempArr[0]), Integer.parseInt(tempArr[1]), Integer.parseInt(tempArr[2])));
+  }*/
 }
 
 void initFrame()
 {
-  camera(player.x, height/2, (height/2.0)/tan(PI*30.0/180.0), player.x, height/2, 0, 0, 1, 0);
+  camera(player.x+player.w,height/2,(height/2.0)/tan(PI*30.0/180.0),player.x+player.w,height/2,0,0,1,0);
 }
 
 void draw()
@@ -78,30 +82,28 @@ void drawBackground()
 void drawObjects()
 {
   for(int i=0; i<items.size(); i++) items.get(i).draw();
+  for(int i=0; i<gold.size(); i++) gold.get(i).draw();
 }
 
 void drawPlayer()
 {
   if(left)
   {
-    if(!leftCollision()) player.moveLeft();
     player.setStatus(WALK);
     player.setDirection(BACKWARD);
+    if(!leftCollision()) player.moveLeft();
   }
     
   else if(right)
   {
-    if(!rightCollision()) player.moveRight();
     player.setStatus(WALK);
     player.setDirection(FORWARD);
+    if(!rightCollision()) player.moveRight();
   }
   
   if((left && right)||(!left && !right)) player.setStatus(IDLE);
   
-  if (space)
-  {
-    player.setStatus(JUMP);
-  }
+  if(space) player.setStatus(JUMP);
   
   player.draw();
 }
@@ -114,7 +116,7 @@ boolean leftCollision()
   {
     Item item = items.get(i);
     
-    if(player.x<item.x+item.w+unit*4 && player.x>item.x && player.y+player.h>item.y)
+    if(player.x<item.x+item.w && player.x>item.x && player.y+player.h>item.y)
     {
       collision=true;
       break;
@@ -132,7 +134,7 @@ boolean rightCollision()
   {
     Item item = items.get(i);
     
-    if(player.x+player.w>item.x-unit*4 && player.x+player.w<item.x+item.w && player.y+player.h>item.y)
+    if(player.x+player.w>item.x && player.x+player.w<item.x+item.w && player.y+player.h>item.y)
     {
       collision=true;
       break;

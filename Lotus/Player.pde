@@ -72,13 +72,8 @@ class Player
     int index = -1;
     
     for(int i=0; i<items.size(); i++) 
-    {
       if(y+h<=items.get(i).y && x+w>=items.get(i).x && x<=items.get(i).x+items.get(i).w)
-      {
         index = i;
-        break;
-      }
-    }
     
     if(index==-1) ground=310*unit;
     else ground=items.get(index).y;
@@ -99,7 +94,7 @@ class Player
   void jump()
   {
     y+=v*unit;
-    if(v<LIMIT/2) v+=0.25;
+    if(v<LIMIT) v+=0.25;
     if(y+h>ground) y=ground-h;
   }
   void moveLeft(){x-=unit;}
