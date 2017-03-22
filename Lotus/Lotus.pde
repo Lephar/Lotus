@@ -11,8 +11,8 @@ Player player;
 
 void settings()
 {
-  fullScreen(P3D);
-  //size(640,480,P3D);
+  //fullScreen(P3D);
+  size(640,480,P3D);
   noSmooth();
 }
 
@@ -34,10 +34,10 @@ void initObjects()
   items = new ArrayList<Item>();
   lines = loadStrings("GameData.txt");
   
-  items.add(new Item(2,500,0));
-  items.add(new Item(4,400,0));
-  items.add(new Item(5,600,0));
-  items.add(new Item(6,800,0));
+  //items.add(new Item(2,500,0));
+  items.add(new Item(5,400,0));
+  items.add(new Item(6,437,0));
+  items.add(new Item(7,525,0));
   gold.add(new Gold(300,0));
   bird = new Bird(300,0);
   

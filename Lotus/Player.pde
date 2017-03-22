@@ -76,7 +76,7 @@ class Player
         index = i;
     
     if(index==-1) ground=310*unit;
-    else if(items.get(index).id == 5) ground=items.get(index).y;
+    else ground=items.get(index).y;
   }
   
   void setStatus(int status)
