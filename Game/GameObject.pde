@@ -33,10 +33,22 @@ class GameObject
     } 
     else if(objectId == 4) //cubuk icin
     {
-      (objectImage = loadImage("bank.png")).resize(130,50);
+      (objectImage = loadImage("cubuk.png")).resize(20,70);
+      w = objectImage.width;
+      h +=objectImage.height;
+    }
+    else if(objectId == 10) //bayrak icin
+    {
+      (objectImage = loadImage("bayrak1.png")).resize(100,height/3);
       w = objectImage.width;
       h +=objectImage.height;
     } 
+    else if(objectId == 11) //otobus icin
+    {
+      (objectImage = loadImage("otobus.png")).resize(200,height/2);
+      w = objectImage.width;
+      h +=objectImage.height;
+    }
   }
   
   void draw()
@@ -54,7 +66,3 @@ class GameObject
   }
   */
 }
-
-  
-  
-  
