@@ -45,7 +45,7 @@ void initObjects()
   for (int i = 0; i < lines.length; i++)
   {
     feature = lines[i].split(" ");
-    items.add(new Item(Integer.parseInt(tempArr[0]), Integer.parseInt(tempArr[1]), Integer.parseInt(tempArr[2])));
+    items.add(new Item(Integer.parseInt(feature[0]), Integer.parseInt(feature[1]), Integer.parseInt(feature[2])));
   }
 }
 
