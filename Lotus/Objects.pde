@@ -130,7 +130,7 @@ class Bomb
     {
       image(bomb,x,y);
       y+=3*unit;
-      if(y==310*unit) done=true;
+      if(y>=310*unit) done=true;
       
       if(x<player.x+player.w && x>player.x && y<player.y+player.h && y>player.y)
       {

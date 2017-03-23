@@ -140,7 +140,16 @@ boolean rightCollision()
   if(player.x+player.w>4250*unit)
   {
     state=SUCC;
-    time=300;
+    PrintWriter writer=null;
+    try 
+    {
+      writer=new PrintWriter(new BufferedWriter(new FileWriter("data/HighScores.txt",true)));
+      writer.println("Time:"+time+" Score:"+score);
+    } 
+    catch (IOException e){}
+    finally{if(writer!=null) writer.close();}
+    temp=time;
+    time=180; 
   }
   
   return collision;

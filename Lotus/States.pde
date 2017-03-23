@@ -64,7 +64,7 @@ void drawBackground()
   if(time==0)
   {
     state=FAIL;
-    time=300;
+    time=180;
   }
   if(frameCount%60==0) time--;
 }
@@ -107,7 +107,7 @@ void drawSuccess()
   textSize(36*unit);
   text("You Win!",player.x+player.w/2,2*height/5);
   textSize(24*unit);
-  text("You have collected " + score + " score in " + (180-time) + " seconds!",player.x+player.w/2,3*height/5);
+  text("You have collected " + score + " score in " + (180-temp) + " seconds!",player.x+player.w/2,3*height/5);
   if(time==0)
   {
     initialized=false;

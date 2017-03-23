@@ -1,10 +1,11 @@
 import java.awt.*;
+import java.io.*;
 import gab.opencv.*;
 import processing.sound.*;
 import processing.video.*;
 
 float unit;
-int time, score, state;
+int time, score, state, temp;
 boolean up, down, left, right, space, shift, initialized, loaded;
 boolean neg, neu, pos;
 String feature[], goldlines[], datalines[];
@@ -124,7 +125,7 @@ void initSketch()
   items = new ArrayList<Item>();
   birds = new ArrayList<Bird>();
   
-  for(int i=0; i<20; i++) birds.add(new Bird(i*500,0));
+  for(int i=0; i<6; i++) birds.add(new Bird(i*12  00,0));
   
   for (int i=0; i<datalines.length; i++)
   {
