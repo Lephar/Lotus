@@ -6,7 +6,7 @@ int x1,y1,x2,y2;
 
 void settings()
 {
-  size(640,240,P3D);
+  size(1280,480,P3D);
   noSmooth();
 }
 
@@ -30,8 +30,8 @@ void draw()
   //haar=haar(mirror(edge(blur(camera))));
   //image(lhaar(mirror(edge(blur(camera)))),camera.width/2,height/2);
   //image(lhaar(mirror(camera)),camera.width+camera.width/2,height/2);
-  image(edge(blur(camera)),camera.width/2,height/2);
-  image(blurp(blurp(blurp(blurp(blurp(camera))))),camera.width+camera.width/2,height/2);
+  image(edge(camera),camera.width/2,height/2);
+  image(camera,camera.width+camera.width/2,height/2);
   surface.setTitle(""+frameRate);
 }
 
