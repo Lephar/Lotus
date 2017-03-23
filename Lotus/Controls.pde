@@ -145,3 +145,12 @@ boolean rightCollision()
   
   return collision;
 }
+
+PImage mirror(PImage raw)
+{
+  raw.loadPixels();
+  PImage mirror=createImage(raw.width,raw.height,ARGB);
+  for(int i=0;i<mirror.width;i++) for(int j=0;j<mirror.height;j++) mirror.pixels[i+j*mirror.width]=raw.pixels[raw.width-i-1+j*raw.width];
+  mirror.updatePixels();
+  return mirror;
+}

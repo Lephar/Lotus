@@ -1,5 +1,6 @@
 import java.awt.*;
 import gab.opencv.*;
+import processing.sound.*;
 import processing.video.*;
 
 float unit;
@@ -10,11 +11,13 @@ String feature[], goldlines[], datalines[];
 final int IDLE=4, WALK=12, FALL=13, JUMP=14, BACKWARD=-1, FORWARD=1, LIMIT=6, GOLD=26, BIRD=2;
 final int MENU=0, GAME=1, SUCC=2, FAIL=3;
 ArrayList<Item> items;
+ArrayList<Bird> birds;
 ArrayList<Gold> gold;
 Rectangle face, faces[];
 PImage bus, flag, background;
 PGraphics east, west, north;
 PVector vector;
+SoundFile music;
 Player player;
 Capture cam;
 OpenCV cv;
@@ -82,6 +85,7 @@ void draw()
 void loadObjects()
 {
   (cam=new Capture(this,320,240,15)).start();
+  //(cam=new Capture(this,640,480,30)).start();
   (cv=new OpenCV(this,cam.width,cam.height)).loadCascade(OpenCV.CASCADE_FRONTALFACE);
   
   west=createGraphics(cam.width,cam.height);
@@ -95,8 +99,12 @@ void loadObjects()
   (bus = loadImage("images/otobus.png")).resize(0,int(112*unit));
   (flag = loadImage("images/bayrak1.png")).resize(int(60*unit),int(120*unit));
   
-  datalines = loadStrings("GameData.txt");
-  goldlines = loadStrings("GoldData.txt");
+  datalines = loadStrings("data/GameData.txt");
+  goldlines = loadStrings("data/GoldData.txt");
+  
+  music=new SoundFile(this,"music/fon.mp3");
+  music.play();
+  music.loop();
   
   loaded = true;
 }
@@ -104,7 +112,7 @@ void loadObjects()
 void initSketch()
 {
   score = 0;
-  time = 10;
+  time = 180;
   up = down = left = right = space = false;
   neu = neg = pos = false;
   
@@ -114,6 +122,9 @@ void initSketch()
   player = new Player();
   gold = new ArrayList<Gold>();
   items = new ArrayList<Item>();
+  birds = new ArrayList<Bird>();
+  
+  for(int i=0; i<20; i++) birds.add(new Bird(i*500,0));
   
   for (int i=0; i<datalines.length; i++)
   {
@@ -129,7 +140,7 @@ void initSketch()
   
   initialized = true;
 }
-
+/*
 void keyPressed()
 {
   if(key==' ') space=true;
@@ -150,3 +161,4 @@ void keyReleased()
   else if(keyCode==SHIFT) shift=false;
   
 }
+*/

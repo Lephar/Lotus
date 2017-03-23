@@ -85,23 +85,58 @@ class Bird
   int frame;
   float x, y, w, h;
   PImage bird[];
+  ArrayList<Bomb> bombs;
   
   Bird(int x, int y)
   {
     w = unit*42;
     h = unit*42;
     this.x = x*unit;
-    this.y = (y+112)*unit-h;
+    this.y = (y+108)*unit-h;
     
     frame=0;
     bird = new PImage[BIRD];
     for(int i=0; i<BIRD; i++) (bird[i] = loadImage("images/b"+i+".png")).resize(int(w),int(h));
+    bombs = new ArrayList<Bomb>();
   }
   
   void draw()
   {
-    image(bird[(frame/24)%BIRD],x,y);
-    x+=unit;
+    image(mirror(bird[(frame/24)%BIRD]),x,y);
+    if(frame%360==0) bombs.add(new Bomb(int(x+w/2),int(y+h)));
+    for(int i=0; i<bombs.size(); i++) bombs.get(i).draw();
+    x-=unit;
     frame++;
+  }
+}
+
+class Bomb
+{
+  float x,y;
+  PImage bomb;
+  boolean done;
+  
+  Bomb(int x, int y)
+  {
+    this.x=x;
+    this.y=y;
+    done=false;
+    (bomb=loadImage("images/bomb.png")).resize(int(5*unit),int(9*unit));
+  }
+  
+  void draw()
+  {
+    if(!done)
+    {
+      image(bomb,x,y);
+      y+=3*unit;
+      if(y==310*unit) done=true;
+      
+      if(x<player.x+player.w && x>player.x && y<player.y+player.h && y>player.y)
+      {
+        done=true;
+        score-=5;
+      }
+    }
   }
 }

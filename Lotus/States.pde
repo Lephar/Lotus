@@ -72,6 +72,7 @@ void drawBackground()
 void drawObjects()
 {
   for(int i=0; i<items.size(); i++) items.get(i).draw();
+  for(int i=0; i<birds.size(); i++) birds.get(i).draw();
   for(int i=0; i<gold.size(); i++) gold.get(i).draw();
 }
 
