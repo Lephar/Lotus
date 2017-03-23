@@ -1,12 +1,15 @@
+import java.awt.*;
+import gab.opencv.*;
+import processing.video.*;
+
 float unit;
 int time, score, mode;
-boolean up, down, left, right, space, shift;
+boolean up, down, left, right, space, shift, initialized;
 String feature[], lines[];
 final int IDLE=4, WALK=12, FALL=13, JUMP=14, BACKWARD=-1, FORWARD=1, LIMIT=6, GOLD=26, BIRD=2;
 ArrayList<Item> items;
 ArrayList<Gold> gold;
-PImage bus, background;
-Bird bird;
+PImage bus, flag, background;
 Player player;
 
 void settings()
@@ -24,44 +27,15 @@ void setup()
   up = down = left = right = space = false;
   mode = 1;
   score = 0;
-  time = 120;
-  
-  initObjects();
-}
-
-void initObjects()
-{
-  textSize(24*unit);
-  textAlign(CENTER);
-  
-  (background=loadImage("images/bg1.png")).resize(0,height);
-  (bus = loadImage("images/otobus.png")).resize(0,int(112*unit));
-  
-  player = new Player();
-  gold = new ArrayList<Gold>();
-  items = new ArrayList<Item>();
-  
-  lines = loadStrings("GameData.txt");
-  /*
-  items.add(new Item(2,500,0));
-  items.add(new Item(5,400,0));
-  items.add(new Item(6,437,0));
-  items.add(new Item(7,525,0));
-  */
-  gold.add(new Gold(0,300,0));
-  gold.add(new Gold(1,400,0));
-  bird = new Bird(300,0);
-  
-  for (int i = 0; i < lines.length; i++)
-  {
-    feature = lines[i].split(" ");
-    items.add(new Item(Integer.parseInt(feature[0]), Integer.parseInt(feature[1]), Integer.parseInt(feature[2])));
-  }
+  time = 10;
+  initialized = false;
 }
 
 void draw()
 {
-  if(mode==0)
+  if(!initialized) initObjects();
+  
+  else if(mode==0)
   {
     //drawMenu();
   }
@@ -70,30 +44,58 @@ void draw()
   {
     //score();
     //detect();
-    initFrame();
     drawBackground();
     drawObjects();
     drawPlayer();
   }
   
-  else if(mode==2)
-  {
-    //drawFinish();
-  }
+  else if(mode==2) drawSuccess();
+  else if(mode==3) drawFailure();
 }
 
-void initFrame()
+void initObjects()
 {
-  camera(player.x+player.w,height/2,(height/2.0)/tan(PI*30.0/180.0),player.x+player.w,height/2,0,0,1,0);
+  textSize(24*unit);
+  textAlign(CENTER);
+  
+  (background = loadImage("images/bg1.png")).resize(0,height);
+  (bus = loadImage("images/otobus.png")).resize(0,int(112*unit));
+  (flag = loadImage("images/bayrak1.png")).resize(int(60*unit),int(120*unit));
+  
+  player = new Player();
+  gold = new ArrayList<Gold>();
+  items = new ArrayList<Item>();
+  
+  lines = loadStrings("GameData.txt");
+
+  for (int i = 0; i < lines.length; i++)
+  {
+    feature = lines[i].split(" ");
+    items.add(new Item(Integer.parseInt(feature[0]), Integer.parseInt(feature[1]), Integer.parseInt(feature[2])));
+  }
+  
+  lines = loadStrings("GoldData.txt");
+
+  for (int i = 0; i < lines.length; i++)
+  {
+    feature = lines[i].split(" ");
+    gold.add(new Gold(Integer.parseInt(feature[0]), Integer.parseInt(feature[1]), Integer.parseInt(feature[2])));
+  }
+  
+  initialized = true;
 }
 
 void drawBackground()
 {
+  camera(player.x+player.w,height/2,(height/2.0)/tan(PI*30.0/180.0),player.x+player.w,height/2,0,0,1,0);
+  
   for(int i=-1; i<16; i++) image(background,i*background.width,0);
   image(bus,width/3-bus.width,310*unit-bus.height);
+  image(flag,4250*unit,310*unit-flag.height);
   fill(255,0,0);
   text(""+time,player.x+player.w-width/2+width/10,height/10);
   text(""+score,player.x+player.w-width/2+9*width/10,height/10);
+  if(time==0) mode=3;
   if(frameCount%60==0) time--;
 }
 
@@ -101,7 +103,6 @@ void drawObjects()
 {
   for(int i=0; i<items.size(); i++) items.get(i).draw();
   for(int i=0; i<gold.size(); i++) gold.get(i).draw();
-  bird.draw();
 }
 
 void drawPlayer()
@@ -127,6 +128,24 @@ void drawPlayer()
   if(space) player.setStatus(JUMP);
   
   player.draw();
+}
+
+void drawSuccess()
+{
+  fill(0,127,0);
+  textSize(36*unit);
+  text("You Win!",player.x+player.w/2,2*height/5);
+  textSize(24*unit);
+  text("You have collected " + score + " score in " + (180-time) + " seconds!",player.x+player.w/2,3*height/5);
+}
+
+void drawFailure()
+{
+  fill(0,127,0);
+  textSize(36*unit);
+  text("You Lost :(",player.x+player.w/2,2*height/5);
+  textSize(24*unit);
+  text("You have collected " + score + " score in " + 180 + " seconds.",player.x+player.w/2,3*height/5);
 }
 
 boolean leftCollision()
@@ -163,6 +182,8 @@ boolean rightCollision()
       break;
     }
   }
+  
+  if(player.x+player.w>4250*unit) mode=2;
   
   return collision;
 }

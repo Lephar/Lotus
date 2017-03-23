@@ -89,14 +89,14 @@ class Player
     }
   }
   
-  void setDirection(int direction){this.direction=direction;}
-  
   void jump()
   {
     y+=v*unit;
     if(v<LIMIT) v+=0.25;
     if(y+h>ground) y=ground-h;
   }
-  void moveLeft(){x-=unit;}
-  void moveRight(){x+=unit;}
+  
+  void moveLeft(){x-=unit*10;}
+  void moveRight(){x+=unit*10;}
+void setDirection(int direction){this.direction=direction;}
 }
