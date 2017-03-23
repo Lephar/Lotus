@@ -1,4 +1,4 @@
-void control()
+void controlHead()
 {
   int index, value;
   
@@ -104,11 +104,46 @@ void control()
   popMatrix();
 }
 
-PImage mirror(PImage raw)
+boolean leftCollision()
 {
-  raw.loadPixels();
-  PImage mirror=createImage(raw.width,raw.height,ARGB);
-  for(int i=0;i<mirror.width;i++) for(int j=0;j<mirror.height;j++) mirror.pixels[i+j*mirror.width]=raw.pixels[raw.width-i-1+j*raw.width];
-  mirror.updatePixels();
-  return mirror;
+  if(player.x<=width/3) return true;
+  
+  boolean collision=false;
+  
+  for(int i=0; i<items.size(); i++)
+  {
+    Item item = items.get(i);
+    
+    if(player.x<item.x+item.w && player.x>item.x && player.y+player.h>item.y)
+    {
+      collision=true;
+      break;
+    }
+  }
+  
+  return collision;
+}
+
+boolean rightCollision()
+{
+  boolean collision=false;
+  
+  for(int i=0; i<items.size(); i++)
+  {
+    Item item = items.get(i);
+    
+    if(player.x+player.w>item.x && player.x+player.w<item.x+item.w && player.y+player.h>item.y)
+    {
+      collision=true;
+      break;
+    }
+  }
+  
+  if(player.x+player.w>4250*unit)
+  {
+    state=SUCC;
+    time=300;
+  }
+  
+  return collision;
 }
