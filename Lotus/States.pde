@@ -3,10 +3,11 @@ void drawMenu()
   image(background,0,0);
   
   pushMatrix();
+  resetMatrix();
   rectMode(CORNER);
   textAlign(CENTER,CENTER);
   textSize(32*unit);
-  translate(player.x+player.w-width/2,0);
+  camera(width/2,height/2,(height/2.0)/tan(PI*30.0/180.0),width/2,height/2,0,0,1,0);
   fill(255,127,0,127);
   strokeWeight(4);
   

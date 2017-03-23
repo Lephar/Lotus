@@ -57,8 +57,6 @@ void controlHead()
       
       face=faces[index];
     }
-    
-    println(neg + " " + neu + " " + pos);
   }
   
   pushMatrix();
