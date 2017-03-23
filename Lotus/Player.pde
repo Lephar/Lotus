@@ -27,7 +27,7 @@ class Player
     v=0;
     w=idler[0].width;
     h=idler[0].height;
-    x=width/2;
+    x=width/2-w;
     y=310*unit-h;
     ground=310*unit;
   }
@@ -96,7 +96,7 @@ class Player
     if(y+h>ground) y=ground-h;
   }
   
-  void moveLeft(){x-=unit*10;}
-  void moveRight(){x+=unit*10;}
+  void moveLeft(){x-=unit;}
+  void moveRight(){x+=unit;}
 void setDirection(int direction){this.direction=direction;}
 }
