@@ -31,18 +31,18 @@ void control()
     if(faces.length>0) neu=true;
     else
     {
-      cv.loadImage(west.get());
-      faces=cv.detect();
-    }
-    
-    if(!neu && faces.length>0) neg=true;
-    else if(!neu)
-    {
       cv.loadImage(east.get());
       faces=cv.detect();
     }
     
-    if(!neu && !neg && faces.length>0) pos=true;
+    if(!neu && faces.length>0) pos=true;
+    else if(!neu)
+    {
+      cv.loadImage(west.get());
+      faces=cv.detect();
+    }
+    
+    if(!neu && !pos && faces.length>0) neg=true;
     
     if(neu||neg||pos)
     {
@@ -61,16 +61,46 @@ void control()
     println(neg + " " + neu + " " + pos);
   }
   
-  noFill();
-  stroke(255,255,0);
-  strokeWeight(2);
   pushMatrix();
+  rectMode(CENTER);
+  noFill();
   translate(player.x+player.w-width/2+cam.width,0);
   scale(-1,1);
   image(cam.get(),0,0);
-  if(face!=null && faces.length!=0) rect(face.x,face.y,face.width,face.height);
-  left = neg;
-  right = pos;
+  
+  if(face!=null && faces.length!=0)
+  {
+    vector=new PVector(face.x+face.width/2-cam.width/2,face.y+face.height/2-cam.height/2);
+    if(neg) vector.rotate(PI/6);
+    else if(pos) vector.rotate(-PI/6);
+    
+    strokeWeight(8);
+    stroke(255,0,0);
+    point(cam.width/2+vector.x,cam.height/2+vector.y);
+    
+    strokeWeight(2);
+    stroke(255,255,0);
+    rect(cam.width/2+vector.x,cam.height/2+vector.y,face.width,face.height);
+    
+    if(cam.width/2+vector.x<2*cam.width/5) right=true;
+    else right=false;
+    if(cam.width/2+vector.x>3*cam.width/5) left=true;
+    else left=false;
+    if(cam.height/2+vector.y<2*cam.height/5) space=true;
+    else space=false;
+  }
+  
+  if(space) stroke(0,255,0);
+  else stroke(0,0,255);
+  line(0,2*cam.height/5,cam.width,2*cam.height/5);
+  
+  if(right) stroke(0,255,0);
+  else stroke(0,0,255);
+  line(2*cam.width/5,0,2*cam.width/5,cam.height);
+  
+  if(left) stroke(0,255,0);
+  else stroke(0,0,255);
+  line(3*cam.width/5,0,3*cam.width/5,cam.height);
   popMatrix();
 }
 

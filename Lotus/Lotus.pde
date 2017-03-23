@@ -13,6 +13,7 @@ ArrayList<Gold> gold;
 Rectangle face, faces[];
 PImage bus, flag, background;
 PGraphics east, west, north;
+PVector vector;
 Player player;
 Capture cam;
 OpenCV cv;
